@@ -1,2 +1,36 @@
-# aoc2024
-Advent of Code 2024
+# Advent of Code 2024
+
+Playing around with the [Advent of Code 2024](https://adventofcode.com/2024) in [Go](https://go.dev/).
+
+## Installing Go in WSL
+
+```sh
+# download the binary installer
+curl -O -L https://go.dev/dl/go1.23.3.linux-amd64.tar.gz
+
+# install, as per https://go.dev/doc/install
+sudo rm -rf /usr/local/go 
+sudo tar -C /usr/local -xzf go1.23.3.linux-amd64.tar.gz
+
+# apply path modification on each login
+cat << 'EOF' >> ~/.profile
+
+# Add Go binary directory to PATH for Go development
+export PATH="$PATH:/usr/local/go/bin"
+EOF
+
+# install Go debugger
+go install -v github.com/go-delve/delve/cmd/dlv@latest
+```
+
+## Build
+
+```sh
+go build ./cmd/aoccli/
+```
+
+## Run
+
+```sh
+./aoccli
+```
