@@ -7,6 +7,7 @@ import (
 
 	"github.com/kabourneeak/aoc2024/internal/cmd/constants"
 	"github.com/kabourneeak/aoc2024/internal/day01"
+	"github.com/kabourneeak/aoc2024/internal/day02"
 	"github.com/kabourneeak/aoc2024/internal/days"
 )
 
@@ -18,7 +19,7 @@ func RootCommand(name string) *cobra.Command {
 	}
 
 	c.AddCommand(
-		ConfigCommand(),
+		EnvCommand(),
 	)
 
 	d := &cobra.Group{ID: constants.DayGroupId, Title: "Days"}
@@ -27,6 +28,7 @@ func RootCommand(name string) *cobra.Command {
 
 	c.AddCommand(
 		createDayCommand(1, day01.Run),
+		createDayCommand(2, day02.Run),
 	)
 
 	return c
@@ -42,8 +44,8 @@ func createDayCommand(day int, run days.DayRunner) *cobra.Command {
 		Short:   short,
 		GroupID: constants.DayGroupId,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			config := GetConfig()
-			input, err := GetPuzzleInput(config, day)
+			env := GetEnv()
+			input, err := GetPuzzleInput(env, day)
 
 			if err != nil {
 				return err

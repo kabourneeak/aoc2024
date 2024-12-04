@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 )
 
-func GetPuzzleInput(cfg CliConfig, day int) (string, error) {
+func GetPuzzleInput(cfg CliEnv, day int) (string, error) {
 	file := fmt.Sprintf("day%d.txt", day)
 	path := filepath.Join(cfg.InputDir, file)
 

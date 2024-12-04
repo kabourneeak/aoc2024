@@ -31,8 +31,22 @@ go build ./cmd/aoccli/
 
 ## Run
 
+The basic run command is as follows, which will display usage information for the tool.
+
 ```sh
 ./aoccli
+```
+
+To understand where to put your test input,
+use the `aoccli env` command
+and note the `Input dir` path.
+
+```sh
+./aoccli env
+Binary name: /home/user/code/aoc2024/aoccli
+Binary path: /home/user/code/aoc2024
+Current dir: /home/user/code/aoc2024
+Input dir: /home/user/code/aoc2024/inputs
 ```
 
 ## Test

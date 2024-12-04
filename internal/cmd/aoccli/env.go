@@ -9,12 +9,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func ConfigCommand() *cobra.Command {
+func EnvCommand() *cobra.Command {
 	c := &cobra.Command{
-		Use:   "config",
-		Short: "Display configuration for this tool",
+		Use:   "env",
+		Short: "Display environment information for this tool",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			printConfig(cmd.OutOrStdout(), GetConfig())
+			printEnv(cmd.OutOrStdout(), GetEnv())
 			return nil
 		},
 	}
@@ -22,20 +22,20 @@ func ConfigCommand() *cobra.Command {
 	return c
 }
 
-type CliConfig struct {
+type CliEnv struct {
 	BaseName string
 	BaseDir  string
 	WorkDir  string
 	InputDir string
 }
 
-func GetConfig() CliConfig {
+func GetEnv() CliEnv {
 	baseName, _ := os.Executable()
 	basePath := filepath.Dir(baseName)
 	workDir, _ := os.Getwd()
 	inputPath := filepath.Join(workDir, "inputs")
 
-	return CliConfig{
+	return CliEnv{
 		BaseName: baseName,
 		BaseDir:  basePath,
 		WorkDir:  workDir,
@@ -43,9 +43,9 @@ func GetConfig() CliConfig {
 	}
 }
 
-func printConfig(w io.Writer, cfg CliConfig) {
-	fmt.Fprintf(w, "Binary name: %s\n", cfg.BaseName)
-	fmt.Fprintf(w, "Binary path: %s\n", cfg.BaseDir)
-	fmt.Fprintf(w, "Current dir: %s\n", cfg.WorkDir)
-	fmt.Fprintf(w, "Input dir: %s\n", cfg.InputDir)
+func printEnv(w io.Writer, env CliEnv) {
+	fmt.Fprintf(w, "Binary name: %s\n", env.BaseName)
+	fmt.Fprintf(w, "Binary path: %s\n", env.BaseDir)
+	fmt.Fprintf(w, "Current dir: %s\n", env.WorkDir)
+	fmt.Fprintf(w, "Input dir: %s\n", env.InputDir)
 }
