@@ -14,7 +14,7 @@ func ConfigCommand() *cobra.Command {
 		Use:   "config",
 		Short: "Display configuration for this tool",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			printConfig(cmd.OutOrStdout())
+			printConfig(cmd.OutOrStdout(), GetConfig())
 			return nil
 		},
 	}
@@ -22,12 +22,30 @@ func ConfigCommand() *cobra.Command {
 	return c
 }
 
-func printConfig(w io.Writer) {
+type CliConfig struct {
+	BaseName string
+	BaseDir  string
+	WorkDir  string
+	InputDir string
+}
+
+func GetConfig() CliConfig {
 	baseName, _ := os.Executable()
 	basePath := filepath.Dir(baseName)
 	workDir, _ := os.Getwd()
+	inputPath := filepath.Join(workDir, "inputs")
 
-	fmt.Fprintf(w, "Binary name: %s\n", baseName)
-	fmt.Fprintf(w, "Binary path: %s\n", basePath)
-	fmt.Fprintf(w, "Current dir: %s\n", workDir)
+	return CliConfig{
+		BaseName: baseName,
+		BaseDir:  basePath,
+		WorkDir:  workDir,
+		InputDir: inputPath,
+	}
+}
+
+func printConfig(w io.Writer, cfg CliConfig) {
+	fmt.Fprintf(w, "Binary name: %s\n", cfg.BaseName)
+	fmt.Fprintf(w, "Binary path: %s\n", cfg.BaseDir)
+	fmt.Fprintf(w, "Current dir: %s\n", cfg.WorkDir)
+	fmt.Fprintf(w, "Input dir: %s\n", cfg.InputDir)
 }

@@ -34,3 +34,9 @@ go build ./cmd/aoccli/
 ```sh
 ./aoccli
 ```
+
+## Test
+
+```sh
+go test ./...
+```
