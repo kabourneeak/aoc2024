@@ -5,11 +5,13 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/kabourneeak/aoc2024/internal/cmd/constants"
 	"github.com/kabourneeak/aoc2024/internal/day01"
 	"github.com/kabourneeak/aoc2024/internal/day02"
 	"github.com/kabourneeak/aoc2024/internal/days"
 )
+
+// cobra cli group for individual days
+const dayGroupId = "day_group"
 
 func RootCommand(name string) *cobra.Command {
 
@@ -22,7 +24,7 @@ func RootCommand(name string) *cobra.Command {
 		EnvCommand(),
 	)
 
-	d := &cobra.Group{ID: constants.DayGroupId, Title: "Days"}
+	d := &cobra.Group{ID: dayGroupId, Title: "Days"}
 
 	c.AddGroup(d)
 
@@ -42,7 +44,7 @@ func createDayCommand(day int, run days.DayRunner) *cobra.Command {
 	c := &cobra.Command{
 		Use:     usage,
 		Short:   short,
-		GroupID: constants.DayGroupId,
+		GroupID: dayGroupId,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			env := GetEnv()
 			input, err := GetPuzzleInput(env, day)
