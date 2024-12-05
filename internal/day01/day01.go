@@ -6,6 +6,8 @@ import (
 	"slices"
 	"strconv"
 	"strings"
+
+	"github.com/kabourneeak/aoc2024/internal/days"
 )
 
 func Run(input string, w io.Writer) error {
@@ -37,7 +39,7 @@ type inputModel struct {
 }
 
 func parseInput(input string) (*inputModel, error) {
-	lines := strings.Split(input, "\n")
+	lines := days.ToLines(input)
 
 	// break into two columns
 	colA := make([]int, 0, len(lines))

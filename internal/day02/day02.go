@@ -5,6 +5,8 @@ import (
 	"io"
 	"strconv"
 	"strings"
+
+	"github.com/kabourneeak/aoc2024/internal/days"
 )
 
 func Run(input string, w io.Writer) error {
@@ -39,7 +41,7 @@ type report struct {
 }
 
 func parseInput(input string) (*inputModel, error) {
-	lines := strings.Split(input, "\n")
+	lines := days.ToLines(input)
 
 	parseLine := func(line string) ([]int, error) {
 		fields := strings.Fields(line)
