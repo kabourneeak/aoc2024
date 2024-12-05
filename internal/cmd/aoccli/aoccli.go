@@ -7,6 +7,7 @@ import (
 
 	"github.com/kabourneeak/aoc2024/internal/day01"
 	"github.com/kabourneeak/aoc2024/internal/day02"
+	"github.com/kabourneeak/aoc2024/internal/day03"
 	"github.com/kabourneeak/aoc2024/internal/days"
 )
 
@@ -31,6 +32,7 @@ func RootCommand(name string) *cobra.Command {
 	c.AddCommand(
 		createDayCommand(1, day01.Run),
 		createDayCommand(2, day02.Run),
+		createDayCommand(3, day03.Run),
 	)
 
 	return c

@@ -15,9 +15,13 @@
             "name": "Launch aoccli",
             "type": "go",
             "request": "launch",
-            "mode": "auto",
-            "program": "cmd/aoccli/main.go",
-            "args": []
+            "mode": "exec",
+            "program": "${workspaceFolder}/aoccli",
+            "args": [
+                "env" // can change to e.g., "day1", to debug actual puzzle inputs
+            ],
+            "preLaunchTask": "Build aoccli",
+            "cwd": "${workspaceFolder}"
         }
     ]
 }
